@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星途 - 科技前沿洞察</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+        body {
+            background-color: #f8f9fa;
+            color: #212529;
+            line-height: 1.6;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #0d6efd;
+        }
+        .header p {
+            font-size: 1.1rem;
+            color: #6c757d;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            min-width: 120px;
+        }
+        .stat-item .number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #0d6efd;
+        }
+        .stat-item .label {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 0.3rem;
+        }
+        .section {
+            margin-bottom: 3rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #212529;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .section h2::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: #0d6efd;
+            border-radius: 2px;
+        }
+        .problem-solution {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .card {
+            padding: 1.5rem;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+        .card h3 {
+            margin-bottom: 1rem;
+            color: #0d6efd;
+        }
+        .card ul {
+            list-style-position: inside;
+            padding-left: 0.5rem;
+        }
+        .card li {
+            margin-bottom: 0.5rem;
+        }
+        .steps {
+            counter-reset: step;
+            margin: 2rem 0;
+        }
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        .step::before {
+            counter-increment: step;
+            content: counter(step);
+            width: 32px;
+            height: 32px;
+            background: #0d6efd;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-weight: bold;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .feature-card {
+            padding: 1.5rem;
+            border-radius: 8px;
+            background: #f8f9fa;
+            border-left: 4px solid #0d6efd;
+        }
+        .feature-card h3 {
+            margin-bottom: 0.8rem;
+        }
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.3s;
+            text-align: left;
+        }
+        .btn:hover {
+            background: #0b5ed7;
+        }
+        .btn small {
+            display: block;
+            color: rgba(255,255,255,0.8);
+            margin-top: 0.3rem;
+            font-size: 0.85rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+        th, td {
+            padding: 0.8rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+        th {
+            background: #f8f9fa;
+            font-weight: 600;
+        }
+        .calendar {
+            margin: 2rem 0;
+        }
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+        }
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8f9fa;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        .calendar-day.today {
+            background: #0d6efd;
+            color: white;
+            font-weight: bold;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e9ecef;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔭 星途 - 科技前沿洞察</h1>
+        <p>系统化追踪全球科技动态，每日/每周输出深度洞察，帮助你保持对前沿科技的全局视野</p>
+    </div>
+
+    <div class="stats">
+        <div class="stat-item">
+            <div class="number">120+</div>
+            <div class="label">追踪人物</div>
+        </div>
+        <div class="stat-item">
+            <div class="number">160+</div>
+            <div class="label">追踪公司</div>
+        </div>
+        <div class="stat-item">
+            <div class="number">300+</div>
+            <div class="label">信息源</div>
+        </div>
+        <div class="stat-item">
+            <div class="number">18</div>
+            <div class="label">深度调研</div>
+        </div>
+        <div class="stat-item">
+            <div class="number">52</div>
+            <div class="label">知识文档</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>关于星途洞察</h2>
+        <div class="problem-solution">
+            <div class="card">
+                <h3>行业痛点</h3>
+                <ul>
+                    <li>信息过载且分散，碎片化严重</li>
+                    <li>信息质量参差不齐，易被误导</li>
+                    <li>难以持续跟踪核心趋势与人物</li>
+                    <li>被动接收信息，无法形成体系</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>解决方案</h3>
+                <ul>
+                    <li>系统化追踪核心人物与公司</li>
+                    <li>每日精选行业动态，去伪存真</li>
+                    <li>深度调研提炼本质规律</li>
+                    <li>持续沉淀形成完整知识体系</li>
+                </ul>
+            </div>
+        </div>
+
+        <h3>四步构建持续研究体系</h3>
+        <div class="steps">
+            <div class="step">
+                <div>
+                    <strong>建立追踪体系</strong><br>
+                    分层管理核心人物、企业、信息源，精准定位价值信息
+                </div>
+            </div>
+            <div class="step">
+                <div>
+                    <strong>每日生成科技日报</strong><br>
+                    覆盖人工智能、量子计算、生物医药、航天科技、半导体五大领域
+                </div>
+            </div>
+            <div class="step">
+                <div>
+                    <strong>深度调研分析</strong><br>
+                    从新闻到洞察，挖掘行业本质，提供论据支撑的深度分析
+                </div>
+            </div>
+            <div class="step">
+                <div>
+                    <strong>知识沉淀体系</strong><br>
+                    按技术、应用、企业、人物多维分类，构建可持续迭代的知识库
+                </div>
+            </div>
+        </div>
+
+        <h3>核心特色</h3>
+        <div class="features">
+            <div class="feature-card">
+                <h3>AI驱动 · 主动研究</h3>
+                <p>不只是工具，而是主动规划、执行、沉淀、迭代的智能研究助手</p>
+            </div>
+            <div class="feature-card">
+                <h3>专业深度 · 拒绝泛化</h3>
+                <p>定向追踪一手信息源，实践者>观察者>决策者，保证信息质量</p>
+            </div>
+            <div class="feature-card">
+                <h3>持续迭代 · 体系化</h3>
+                <p>每日更新、每周迭代、长期沉淀，形成真正的系统性知识框架</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>📰 科技日报 & 周报</h2>
+        <div class="btn-group">
+            <a href="#" class="btn">
+                📊 科技周报 · 第15周（4.06 - 4.12）最新
+                <small>覆盖90+条资讯 · Top5: 量子计算突破、AI机器人量产、脑机接口新进展、商业航天发射、半导体新材料</small>
+            </a>
+            <a href="#" class="btn">
+                📅 2026年04月05日 科技日报 最新
+                <small>谷歌量子芯片里程碑、特斯拉Optimus量产、中国商业航天密集发射、AI药物研发加速、半导体先进制程突破</small>
+            </a>
+        </div>
+
+        <div class="calendar">
+            <h3>2026年4月</h3>
+            <div class="calendar-grid">
+                <div class="calendar-day">日</div>
+                <div class="calendar-day">一</div>
+                <div class="calendar-day">二</div>
+                <div class="calendar-day">三</div>
+                <div class="calendar-day">四</div>
+                <div class="calendar-day">五</div>
+                <div class="calendar-day">六</div>
+                <div class="calendar-day">1</div>
+                <div class="calendar-day">2</div>
+                <div class="calendar-day">3</div>
+                <div class="calendar-day">4</div>
+                <div class="calendar-day today">5</div>
+                <div class="calendar-day">6</div>
+                <div class="calendar-day">7</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🔬 深度调研</h2>
+        <div class="btn-group">
+            <a href="#" class="btn">
+                ⚡ 量子计算技术深度调研 NEW
+                <small>从超导量子到光量子，全球技术路线对比、核心玩家、商业化前景全景解析</small>
+            </a>
+            <a href="#" class="btn">
+                🔬 人形机器人技术架构深度研究
+                <small>运动控制、感知系统、AI大脑三大核心技术解析，行业竞争格局分析</small>
+            </a>
+            <a href="#" class="btn">
+                🚀 商业航天产业深度报告
+                <small>全球商业航天市场规模、核心企业、技术趋势与未来展望</small>
+            </a>
+            <a href="#" class="btn">
+                🧠 脑机接口技术与应用调研
+                <small>医疗、消费、工业三大场景落地案例，技术瓶颈与突破方向</small>
+            </a>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🎯 追踪体系</h2>
+        <h3>核心人物追踪</h3>
+        <table>
+            <tr>
+                <th>人物</th>
+                <th>公司/角色</th>
+                <th>追踪重点</th>
+            </tr>
+            <tr>
+                <td>伊隆·马斯克</td>
+                <td>特斯拉、SpaceX、xAI</td>
+                <td>航天、AI、脑机接口战略布局</td>
+            </tr>
+            <tr>
+                <td>黄仁勋</td>
+                <td>NVIDIA CEO</td>
+                <td>AI芯片、计算平台发展路线</td>
+            </tr>
+            <tr>
+                <td>萨姆·奥尔特曼</td>
+                <td>OpenAI CEO</td>
+                <td>通用人工智能技术与商业化</td>
+            </tr>
+        </table>
+
+        <h3>核心企业追踪</h3>
+        <table>
+            <tr>
+                <th>企业</th>
+                <th>核心领域</th>
+                <th>追踪重点</th>
+            </tr>
+            <tr>
+                <td>OpenAI</td>
+                <td>人工智能</td>
+                <td>大模型、AGI技术突破</td>
+            </tr>
+            <tr>
+                <td>SpaceX</td>
+                <td>商业航天</td>
+                <td>星舰、星链、火星计划</td>
+            </tr>
+            <tr>
+                <td>NVIDIA</td>
+                <td>AI芯片</td>
+                <td>GPU技术、生态系统</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>📚 知识库</h2>
+        <div class="btn-group">
+            <a href="#" class="btn">📄 量子计算基础与技术演进</a>
+            <a href="#" class="btn">📄 人形机器人发展简史</a>
+            <a href="#" class="btn">📄 商业航天产业链分析</a>
+            <a href="#" class="btn">📄 脑机接口技术原理</a>
+            <a href="#" class="btn">📄 半导体先进制程演进</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>星途科技洞察 © 2026 | 持续追踪全球科技前沿，构建系统化知识体系</p>
+    </div>
+</body>
+</html>
